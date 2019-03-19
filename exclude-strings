@@ -1,0 +1,33 @@
+// -- DESCRIPTION -- //
+
+  Exclude URLs with certain strings (like wp-admin and wp-login) from regex redirect rules. This allows the admin to operate normally while the front end is redirected.
+
+// -- EXPRESSION -- //
+
+  ^\/((?!wp-admin)+(?!wp-login).*)*$
+  
+// -- REPLACE RULE -- //
+
+  https://www.NEWDOMAIN.com/$1
+
+// -- TEST INPUT -- //
+
+  /contact
+  /something-else/anothertest.jpg
+  /wp-admin
+  /somethin/wp-admin
+  /wp-login/
+  /blog/
+  /brand/something/
+  /brand/lookhere/page/7/
+
+// -- TEST RESULT -- //
+
+  https://www.NEWDOMAIN.com/contact
+  https://www.NEWDOMAIN.com/something-else/anothertest.jpg
+  /wp-admin
+  https://www.NEWDOMAIN.com/somethin/wp-admin
+  /wp-login/
+  https://www.NEWDOMAIN.com/blog/
+  https://www.NEWDOMAIN.com/brand/something/
+  https://www.NEWDOMAIN.com/brand/lookhere/page/7/
